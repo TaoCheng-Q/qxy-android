@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">AndroidDemo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="page1">page1</string>
+    <string name="page2">page2</string>
+    <string name="page3">page3</string>
+    <string name="page4">page4</string>
+    <string name="page5">page5</string>
+</resources>
