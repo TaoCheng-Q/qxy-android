@@ -26,13 +26,23 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="电影榜单"
-                    android:textSize="30px"/>
+                    android:textAlignment="center"
+                    android:textSize="28sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"/>
+
+                <Spinner
+                    android:id="@+id/movie_ver_spinner"
+                    android:layout_width="93dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="17dp"
+                    android:layout_marginBottom="14dp" />
 
             </RelativeLayout>
         </FrameLayout>
@@ -43,6 +53,7 @@
             android:layout_weight="4">
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/movie_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 

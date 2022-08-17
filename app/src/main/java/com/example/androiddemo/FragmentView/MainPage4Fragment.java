@@ -2,9 +2,11 @@ package com.example.androiddemo.FragmentView;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,12 @@ import android.view.ViewGroup;
 import com.example.androiddemo.R;
 import com.example.androiddemo.adapter.TopListFragmentPagerAdapter;
 import com.example.androiddemo.databinding.FragmentMainPage4Binding;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -63,9 +71,18 @@ public class MainPage4Fragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public void onViewCreated( View view,  Bundle savedInstanceState) {
+        TabLayout tabLayout = view.findViewById(R.id.fragment4_tab_layout);
+        ViewPager2 viewPager = view.findViewById(R.id.fragment4_viewpager);
+        List<String> tabName = Arrays.asList("电影", "电视剧", "综艺");
+        new TabLayoutMediator(tabLayout, viewPager,
+                (tab, position) -> tab.setText(tabName.get(position))
+        ).attach();
+
+        }
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_main_page4, container, false);
