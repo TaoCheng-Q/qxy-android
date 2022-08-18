@@ -4,7 +4,7 @@
     <data>
         <variable
             name="user_text"
-            type="com.example.androiddemo.entity.RecycleViewItem" />
+            type="com.qxy.demo.entity.RecycleViewItem" />
     </data>
 
     <LinearLayout
