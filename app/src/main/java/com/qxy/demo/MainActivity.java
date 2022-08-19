@@ -12,6 +12,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.bytedance.sdk.open.douyin.DouYinOpenApiFactory;
+import com.bytedance.sdk.open.douyin.DouYinOpenConfig;
 import com.qxy.demo.FragmentView.MainPage1Fragment;
 import com.qxy.demo.FragmentView.MainPage2Fragment;
 import com.qxy.demo.FragmentView.MainPage3Fragment;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setTheme(R.style.Theme_AndroidDemo);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         init();
     }
 

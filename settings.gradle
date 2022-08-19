@@ -16,6 +16,7 @@ dependencyResolutionManagement {
         //noinspection JcenterRepositoryObsolete
         jcenter()
         mavenCentral()
+        maven { url 'https://artifact.bytedance.com/repository/AwemeOpenSDK'}
     }
 }
 rootProject.name = "AndroidDemo"
