@@ -26,19 +26,19 @@ public class Show {
     private String directors;
 
     @ColumnInfo(name = "discussion_hot")
-    private long discussion_hot;
+    private String discussion_hot;
 
     @ColumnInfo(name = "hot")
-    private long hot;
+    private String hot;
 
     @ColumnInfo(name = "influence_hot")
-    private long influence_hot;
+    private String influence_hot;
 
     @ColumnInfo(name = "search_hot")
-    private long search_hot;
+    private String search_hot;
 
     @ColumnInfo(name = "topic_hot")
-    private long topic_hot;
+    private String topic_hot;
 
     public Show() {
     }
@@ -91,43 +91,43 @@ public class Show {
         this.directors = directors;
     }
 
-    public long getDiscussion_hot() {
+    public String getDiscussion_hot() {
         return discussion_hot;
     }
 
-    public void setDiscussion_hot(long discussion_hot) {
+    public void setDiscussion_hot(String discussion_hot) {
         this.discussion_hot = discussion_hot;
     }
 
-    public long getHot() {
+    public String getHot() {
         return hot;
     }
 
-    public void setHot(long hot) {
+    public void setHot(String hot) {
         this.hot = hot;
     }
 
-    public long getInfluence_hot() {
+    public String getInfluence_hot() {
         return influence_hot;
     }
 
-    public void setInfluence_hot(long influence_hot) {
+    public void setInfluence_hot(String influence_hot) {
         this.influence_hot = influence_hot;
     }
 
-    public long getSearch_hot() {
+    public String getSearch_hot() {
         return search_hot;
     }
 
-    public void setSearch_hot(long search_hot) {
+    public void setSearch_hot(String search_hot) {
         this.search_hot = search_hot;
     }
 
-    public long getTopic_hot() {
+    public String getTopic_hot() {
         return topic_hot;
     }
 
-    public void setTopic_hot(long topic_hot) {
+    public void setTopic_hot(String topic_hot) {
         this.topic_hot = topic_hot;
     }
 }

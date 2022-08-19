@@ -50,16 +50,16 @@
             android:text="导演"
             android:textSize="18sp"
             />
-        <TextView
-            android:id="@+id/tv_rel_area"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@id/tv_director"
-            android:layout_toRightOf="@id/tv_director"
-            android:text="上映区域"
-            android:textSize="18sp"
-            android:layout_marginLeft="10dp"
-            />
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_rel_area"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_alignBaseline="@id/tv_director"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_toRightOf="@id/tv_director"-->
+<!--            android:text="上映区域"-->
+<!--            android:textSize="18sp" />-->
         <TextView
             android:id="@+id/tv_rel_time"
             android:layout_width="wrap_content"
@@ -69,15 +69,15 @@
             android:text="{上映时间} 播出"
             android:textSize="18sp"
             />
-        <TextView
-            android:id="@+id/tv_tag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tv_rel_time"
-            android:layout_alignLeft="@id/tv_rel_time"
-            android:text="标签一、标签二"
-            android:textSize="18sp"
-            />
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_tag"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/tv_rel_time"-->
+<!--            android:layout_alignLeft="@id/tv_rel_time"-->
+<!--            android:text="标签一、标签二"-->
+<!--            android:textSize="18sp" />-->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

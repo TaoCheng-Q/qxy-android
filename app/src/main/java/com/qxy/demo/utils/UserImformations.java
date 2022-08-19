@@ -17,6 +17,8 @@ public class UserImformations {
 
     private String open_id ;
 
+    private String client_token;
+
     public static UserImformations getInstance(){
         if(userImformations==null){
             userImformations = new UserImformations();
@@ -59,5 +61,13 @@ public class UserImformations {
 
     public void setOpen_id(String open_id) {
         this.open_id = open_id;
+    }
+
+    public String getClient_token() {
+        return client_token;
+    }
+
+    public void setClient_token(String client_token) {
+        this.client_token = client_token;
     }
 }
