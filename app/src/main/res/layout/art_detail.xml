@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <VideoView
+        android:id="@+id/art_video"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_below="@+id/detail_video_view"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/detail_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        android:text="标题"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/detail_video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detail_title"
+        android:layout_alignStart="@+id/detail_title"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="20dp"
+        android:text="播放量"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detail_comment_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/detail_video_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/detail_video_view"
+        android:text="评论量"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detail_post_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/detail_video_view"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/detail_comment_num"
+        android:text="创建时间"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detail_like_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/art_video"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="10dp"
+        android:text="点赞量"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detail_download_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/detail_like_num"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/detail_like_num"
+        android:text="下载量"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detail_forward_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/detail_like_num"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/detail_download_num"
+        android:text="转发量"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detail_share_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/detail_like_num"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/detail_forward_num"
+        android:text="分享量"
+        android:textSize="18sp" />
+</RelativeLayout>

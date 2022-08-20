@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/art_is_top"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:text="is_top"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/art_thumbnail"
+        android:layout_width="match_parent"
+        android:layout_height="503dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:contentDescription="作品缩略图"
+        tools:srcCompat="@tools:sample/backgrounds/scenic[0]" />
+
+    <TextView
+        android:id="@+id/art_video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/art_thumbnail"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="0dp"
+        android:text="播放量"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/art_comment_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/art_video_view"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/art_video_view"
+        android:text="评论量"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/art_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/art_video_view"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="标题"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/art_post_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/art_title"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="创建时间"
+        android:textSize="18sp" />
+
+</RelativeLayout>
