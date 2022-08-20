@@ -12,7 +12,6 @@
         <entry key="..\:/1.MyApp/Git/gitcode/git-android/app/src/main/res/layout/weibo_emotions_item.xml" value="0.25" />
         <entry key="..\:/1.MyApp/Git/gitcode/git-android/app/src/main/res/layout/weibo_massage_item.xml" value="0.27395833333333336" />
         <entry key="..\:/1.MyApp/Git/gitcode/git-android/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2713541666666667" />
-<<<<<<< HEAD
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/drawable/ic_launcher_background.xml" value="0.133" />
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/activity_main.xml" value="0.27309782608695654" />
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/activity_main_tictok.xml" value="0.266304347826087" />
@@ -24,28 +23,20 @@
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/main_item.xml" value="0.27309782608695654" />
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/movie_item.xml" value="0.27309782608695654" />
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/show_item.xml" value="0.27309782608695654" />
+        <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/top_list_version_item.xml" value="0.27309782608695654" />
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/tv_item.xml" value="0.27309782608695654" />
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/weibo_emotions_item.xml" value="0.27309782608695654" />
         <entry key="..\:/1.MyApp/Git/gitworkplace/qxy-android/app/src/main/res/layout/weibo_massage_item.xml" value="0.27309782608695654" />
-=======
->>>>>>> a415bfc28a7c3b31fc3cf6c72a0fdaf5524fe55e
         <entry key="..\:/Projects/Android/git-android/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Projects/Android/git-android/app/src/main/res/layout/fragment_main_page4.xml" value="0.25364583333333335" />
         <entry key="..\:/Projects/Android/git-android/app/src/main/res/layout/fragment_movie.xml" value="0.4" />
         <entry key="..\:/Projects/Android/git-android/app/src/main/res/layout/fragment_shows.xml" value="0.25364583333333335" />
         <entry key="..\:/Projects/Android/git-android/app/src/main/res/layout/main_page4tablayout.xml" value="0.1125" />
         <entry key="..\:/Projects/Android/git-android/app/src/main/res/layout/movie_item.xml" value="0.264" />
-        <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/art_detail.xml" value="0.264" />
-        <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/art_item.xml" value="0.2" />
-        <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/follow_fan_item.xml" value="0.2" />
-        <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/follow_fan_layout.xml" value="0.176" />
         <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/fragment_main_page4.xml" value="0.1125" />
-        <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/fragment_main_page5.xml" value="0.176" />
         <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/fragment_movie.xml" value="0.2" />
         <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/fragment_shows.xml" value="0.1125" />
         <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/fragment_t_v.xml" value="0.1125" />
-        <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/main_item.xml" value="0.1421875" />
-        <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/movie_item.xml" value="0.16799999999999998" />
         <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/show_item.xml" value="0.28125" />
         <entry key="..\:/Projects/Android/qxy-android/app/src/main/res/layout/tv_item.xml" value="0.264" />
       </map>

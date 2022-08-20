@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 import com.qxy.demo.entity.topList.MovieList;
 import com.qxy.demo.entity.topList.ShowList;
 import com.qxy.demo.entity.topList.TvList;
+import com.qxy.demo.entity.topList.VersionList;
 import com.qxy.demo.models.RequestDouYin;
 import com.qxy.demo.room.entity.topListEntity.Movie;
 import com.qxy.demo.room.entity.topListEntity.Show;
@@ -35,6 +36,8 @@ public class TopListViewModel extends ViewModel {
     private MutableLiveData<TvList> tvListMutableLiveData;
 
     private MutableLiveData<ShowList> showListMutableLiveData;
+
+    private MutableLiveData<VersionList> versionListMutableLiveData;
 
     private int topListType = 2;
 
@@ -71,6 +74,56 @@ public class TopListViewModel extends ViewModel {
         }
     };
 
+    public MutableLiveData<VersionList> getVersionListMutableLiveData(int type,int cursor,int page_count){
+        if(versionListMutableLiveData==null){
+            versionListMutableLiveData=new MutableLiveData<>();
+        }
+
+        RequestDouYin.getTopList(RequestDouYin.TOP_LIST_VERSION, getHeaderMap(), getVersionBodyMap(type, cursor, page_count), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                try {
+                    VersionList versionList = new VersionList();
+                    List<Integer> integers = new ArrayList<>();
+                    JSONObject res = new JSONObject(new JSONObject(response.body().string()).getString("data"));
+                    if(res.getInt("error_code")==0){
+                        versionList.setCursor(res.getInt("cursor"));
+                        versionList.setHasMore(res.getBoolean("has_more"));
+                        JSONArray array = new JSONArray(res.getString("list"));
+                        for(int i=0;i<array.length();i++){
+                            JSONObject item = (JSONObject) array.get(i);
+                            integers.add(item.getInt("version"));
+                        }
+                        versionList.setIntegerList(integers);
+                        versionListMutableLiveData.postValue(versionList);
+                    }else {
+//                        topListType=4;
+//                        RequestDouYin.getClientToken(clientCallback);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        return versionListMutableLiveData;
+    }
+
+    private Map<String,String> getVersionBodyMap(int type, int cursor, int page_count) {
+        Map<String,String> bodyMap = new HashMap<>();
+        bodyMap.put("type",String.valueOf(type));
+        bodyMap.put("cursor",String.valueOf(cursor));
+        bodyMap.put("count",String.valueOf(page_count));
+
+        return bodyMap;
+    }
+
     public MutableLiveData<MovieList> getMovieListMutableLiveData(int version){
 
         if(movieListMutableLiveData==null){
@@ -79,7 +132,7 @@ public class TopListViewModel extends ViewModel {
 //        网络获取电影排行榜列表
 //        Log.d("TAG", "onFailure: xxxxxxxxxxxxx");
         
-        RequestDouYin.getTopList(getHeaderMap(), getBodyMap("1",version), new Callback() {
+        RequestDouYin.getTopList(RequestDouYin.TOP_LIST,getHeaderMap(), getBodyMap("1",version), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("TAG", "onFailure: xxxxxxxxxxxxx");
@@ -167,7 +220,7 @@ public class TopListViewModel extends ViewModel {
         }
 //        获取电视剧排行榜
 
-        RequestDouYin.getTopList(getHeaderMap(), getBodyMap("2",version), new Callback() {
+        RequestDouYin.getTopList(RequestDouYin.TOP_LIST,getHeaderMap(), getBodyMap("2",version), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 
@@ -222,7 +275,7 @@ public class TopListViewModel extends ViewModel {
             showListMutableLiveData=new MutableLiveData<>();
         }
 //        获取show榜单
-        RequestDouYin.getTopList(getHeaderMap(), getBodyMap("3",version), new Callback() {
+        RequestDouYin.getTopList(RequestDouYin.TOP_LIST,getHeaderMap(), getBodyMap("3",version), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 

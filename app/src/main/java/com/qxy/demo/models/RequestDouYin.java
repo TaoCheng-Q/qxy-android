@@ -23,13 +23,21 @@ import okhttp3.Response;
 
 public class RequestDouYin {
 
-    static String TOKEN_URL = "https://open.douyin.com/oauth/access_token/";
+    public static String TOKEN_URL = "https://open.douyin.com/oauth/access_token/";
 
-    static String  CLIENT_TOKEN = "https://open.douyin.com/oauth/client_token/";
+    public static String  CLIENT_TOKEN = "https://open.douyin.com/oauth/client_token/";
 
-    static String TOP_LIST="https://open.douyin.com/discovery/ent/rank/item/";
+    public static String TOP_LIST="https://open.douyin.com/discovery/ent/rank/item/";
 
-    public static void getTopList(Map<String,String> headerMap,Map<String,String> bodyMap,Callback callback){
+    public static String TOP_LIST_VERSION="https://open.douyin.com/discovery/ent/rank/version/";
+
+    public static int PAGE_COUNT=10;
+
+    public static void getTopListVersion(int cursor,Callback callback){
+
+    }
+
+    public static void getTopList(String url,Map<String,String> headerMap,Map<String,String> bodyMap,Callback callback){
         OkHttpClient client = new OkHttpClient();
         Request.Builder request = new Request.Builder();
         for (String item:
@@ -38,7 +46,7 @@ public class RequestDouYin {
                 request.addHeader(item,headerMap.get(item));
             }
         }
-        String url = TOP_LIST;
+//        String url = TOP_LIST;
         url = url+"?";
         for (String key: bodyMap.keySet()){
             url = url + key+"="+bodyMap.get(key)+"&";

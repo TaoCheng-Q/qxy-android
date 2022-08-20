@@ -16,12 +16,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.qxy.demo.R;
 import com.qxy.demo.adapter.topListAdapter.ShowAdapter;
 import com.qxy.demo.adapter.topListAdapter.TvAdapter;
+import com.qxy.demo.adapter.topListAdapter.VersionAdapter;
 import com.qxy.demo.databinding.FragmentTVBinding;
 import com.qxy.demo.entity.topList.TvList;
+import com.qxy.demo.entity.topList.VersionList;
+import com.qxy.demo.models.RequestDouYin;
 import com.qxy.demo.viewmodels.TopListViewModel;
 import com.qxy.demo.viewmodels.topListViewmodels.TVViewModel;
 
@@ -33,6 +37,9 @@ public class TVFragment extends Fragment {
     private TvAdapter adapter;
 //    选择榜单版本的时候修改
     private int version=-1;
+
+    private VersionAdapter versionAdapter;
+    private int cursor =0;
 
     public static TVFragment newInstance() {
         return new TVFragment();
@@ -47,7 +54,24 @@ public class TVFragment extends Fragment {
         adapter = new TvAdapter(getContext());
         binding.tvList.setAdapter(adapter);
         mViewModel = new ViewModelProvider(this).get(TopListViewModel.class);
+        versionAdapter = new VersionAdapter(getContext());
+
+        binding.tvVerSpinner.setAdapter(versionAdapter);
+
         loadTvs();
+        loadVersion();
+        binding.tvVerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                version = (int) versionAdapter.getItem(i);
+                loadTvs();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         binding.tvRecycleView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -56,6 +80,17 @@ public class TVFragment extends Fragment {
             }
         });
         return binding.getRoot();
+    }
+
+    private void loadVersion() {
+        mViewModel.getVersionListMutableLiveData(1,cursor, RequestDouYin.PAGE_COUNT).observe(getViewLifecycleOwner(), new Observer<VersionList>() {
+            @Override
+            public void onChanged(VersionList versionList) {
+                versionAdapter.setIntegerList(versionList.getIntegerList());
+                cursor=versionList.getCursor();
+//                versionList.isHasMore();
+            }
+        });
     }
 
     private void loadTvs() {

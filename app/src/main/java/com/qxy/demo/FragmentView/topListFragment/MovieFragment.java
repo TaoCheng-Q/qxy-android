@@ -16,12 +16,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.qxy.demo.R;
 import com.qxy.demo.adapter.topListAdapter.MovieAdapter;
+import com.qxy.demo.adapter.topListAdapter.VersionAdapter;
 import com.qxy.demo.databinding.FragmentMovieBinding;
 import com.qxy.demo.entity.topList.MovieList;
+import com.qxy.demo.entity.topList.VersionList;
+import com.qxy.demo.models.RequestDouYin;
 import com.qxy.demo.viewmodels.TopListViewModel;
 import com.qxy.demo.viewmodels.topListViewmodels.MovieViewModel;
 
@@ -31,6 +35,8 @@ public class MovieFragment extends Fragment {
     private FragmentMovieBinding binding;
     private MovieAdapter adapter;
     private int version = -1;
+    private VersionAdapter versionAdapter;
+    private int cursor =0;
 
     public static MovieFragment newInstance() {
         return new MovieFragment();
@@ -44,9 +50,23 @@ public class MovieFragment extends Fragment {
         binding.movieList.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.movieList.setAdapter(adapter);
         mViewModel = new ViewModelProvider(this).get(TopListViewModel.class);
-//        binding.movieVerSpinner.setAdapter(new ArrayAdapter<String>());
+        versionAdapter = new VersionAdapter(getContext());
+        binding.movieVerSpinner.setAdapter(versionAdapter);
 
         loadMovies();
+        loadVersion();
+        binding.movieVerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                version = (int) versionAdapter.getItem(i);
+                loadMovies();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         binding.movieRecycleView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -58,6 +78,17 @@ public class MovieFragment extends Fragment {
 
         return binding.getRoot();
 //        return inflater.inflate(R.layout.fragment_movie, container, false);
+    }
+
+    private void loadVersion() {
+        mViewModel.getVersionListMutableLiveData(1,cursor, RequestDouYin.PAGE_COUNT).observe(getViewLifecycleOwner(), new Observer<VersionList>() {
+            @Override
+            public void onChanged(VersionList versionList) {
+                versionAdapter.setIntegerList(versionList.getIntegerList());
+                cursor=versionList.getCursor();
+//                versionList.isHasMore();
+            }
+        });
     }
 
     private void loadMovies() {
