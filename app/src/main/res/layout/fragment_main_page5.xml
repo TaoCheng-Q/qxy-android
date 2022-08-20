@@ -1,14 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentView.MainPage5Fragment">
+    >
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/person_avatar"
+        android:layout_width="110dp"
+        android:layout_height="108dp"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="57dp"
+        android:contentDescription="个人头像"
+        tools:src="@tools:sample/avatars[0]" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/person_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="150dp"
+        android:text="昵称"
+        android:textSize="18sp" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/person_sex"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/person_nickname"
+        android:layout_alignStart="@+id/person_nickname"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="55dp"
+        android:text="性别标志 性别"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/person_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/person_sex"
+        android:layout_alignStart="@+id/person_nickname"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:text="城市"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/following_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/person_avatar"
+        android:layout_alignStart="@+id/person_avatar"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="44dp"
+        android:text="102 关注"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/fans_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/following_num"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/following_num"
+        android:text="22 粉丝"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/art_tab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/following_num"
+        android:layout_alignStart="@+id/following_num"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="30dp"
+        android:text="作品"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/person_country"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/person_sex"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="44dp"
+        android:layout_toEndOf="@+id/person_city"
+        android:text="国家"
+        android:textSize="18sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/art_list"
+        android:layout_width="327dp"
+        android:layout_height="442dp"
+        android:layout_below="@+id/art_tab"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="0dp" />
+
+</RelativeLayout>
