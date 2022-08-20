@@ -58,8 +58,8 @@ public class TVFragment extends Fragment {
 
         binding.tvVerSpinner.setAdapter(versionAdapter);
 
-        loadTvs();
-        loadVersion();
+//        loadTvs();
+//        loadVersion();
         binding.tvVerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -100,6 +100,13 @@ public class TVFragment extends Fragment {
                 adapter.setTelevisionList(tvList.getTelevisionList());
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadVersion();
+        loadTvs();
     }
 
     @Override

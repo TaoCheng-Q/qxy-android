@@ -20,9 +20,9 @@ public class TopListFragmentPagerAdapter extends FragmentStateAdapter {
 
     public TopListFragmentPagerAdapter(@NonNull Fragment fragment) {
         super(fragment);
-        movieFragment = MovieFragment.newInstance();
-        tvFragment = TVFragment.newInstance();
-        showsFragment = ShowsFragment.newInstance();
+//        movieFragment = MovieFragment.newInstance();
+//        tvFragment = TVFragment.newInstance();
+//        showsFragment = ShowsFragment.newInstance();
     }
 
 

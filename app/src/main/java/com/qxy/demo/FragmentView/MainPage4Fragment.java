@@ -71,10 +71,10 @@ public class MainPage4Fragment extends Fragment {
     }
     @Override
     public void onViewCreated( View view,  Bundle savedInstanceState) {
-        TabLayout tabLayout = view.findViewById(R.id.fragment4_tab_layout);
-        ViewPager2 viewPager = view.findViewById(R.id.fragment4_viewpager);
+//        TabLayout tabLayout = view.findViewById(R.id.fragment4_tab_layout);
+//        ViewPager2 viewPager = view.findViewById(R.id.fragment4_viewpager);
         List<String> tabName = Arrays.asList("电影", "电视剧", "综艺");
-        new TabLayoutMediator(tabLayout, viewPager,
+        new TabLayoutMediator(binding.fragment4TabLayout, binding.fragment4Viewpager,
                 (tab, position) -> tab.setText(tabName.get(position))
         ).attach();
 

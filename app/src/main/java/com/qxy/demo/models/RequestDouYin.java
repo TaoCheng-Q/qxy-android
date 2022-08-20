@@ -31,6 +31,14 @@ public class RequestDouYin {
 
     public static String TOP_LIST_VERSION="https://open.douyin.com/discovery/ent/rank/version/";
 
+    public static String USERINFO="https://open.douyin.com/oauth/userinfo/";
+
+    public static String VIDEO_LIST = "https://open.douyin.com/video/list/";
+
+    public static String FOLLOWING_LIST="https://open.douyin.com/following/list/";
+
+    public static String FANS_LIST="https://open.douyin.com/fans/list/";
+
     public static int PAGE_COUNT=10;
 
     public static void getTopListVersion(int cursor,Callback callback){
@@ -90,6 +98,44 @@ public class RequestDouYin {
 
         }
         client.newCall(request.build()).enqueue(callback);
+    }
+
+
+    public void requestAccessToken(Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add("client_key", UserImformations.getInstance().getKey())
+                .add("client_secret",UserImformations.getInstance().getSecret())
+                .add("grant_type","authorization_code")
+                .add("code",UserImformations.getInstance().getCode())
+                .build();
+        final Request request = new Request.Builder()
+                .url(TOKEN_URL)
+                .post(body).build();
+        client.newCall(request).enqueue(callback);
+//        Call call = client.newCall(request);
+//        call.enqueue(new Callback() {
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) throws IOException {
+//
+//                try {
+////                Log.d("TAG", "onResponse: "+response.body().string());
+//                    JSONObject jsonObject = new JSONObject(response.body().string());
+//                    JSONObject json = new JSONObject(jsonObject.getString("data"));
+//                    UserImformations.getInstance().setToken(json.getString("access_token"));
+//                    UserImformations.getInstance().setOpen_id(json.getString("open_id"));
+//                    UserImformations.getInstance().setRefresh_token(json.getString("refresh_token"));
+//                    Log.d("TAG", "onResp: "+"token"+UserImformations.getInstance().getToken()+"//open-id"+UserImformations.getInstance().getOpen_id()+"//"+UserImformations.getInstance().getCode());
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
     }
 
 public void requestToken(){

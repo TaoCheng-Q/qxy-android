@@ -52,8 +52,8 @@ public class ShowsFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(TopListViewModel.class);
         versionAdapter = new VersionAdapter(getContext());
         binding.showsVerSpinner.setAdapter(versionAdapter);
-        loadShows();
-        loadVersion();
+//        loadShows();
+//        loadVersion();
         binding.showsVerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -96,6 +96,13 @@ public class ShowsFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadShows();
+        loadVersion();
     }
 
     @Override

@@ -7,19 +7,19 @@ public class UserImformations {
 
     }
 
-    private String code;
+    private String code="";
 
-    private String token;
+    private String token="";
 
     private String key= "awo0xxllhhzsflua";
 
     private String secret = "7de1fe94041b07e259d008a5cec19c8c";
 
-    private String open_id ;
+    private String open_id ="";
 
-    private String client_token;
+    private String client_token="";
 
-    private String refresh_token;
+    private String refresh_token="";
 
     public static UserImformations getInstance(){
         if(userImformations==null){

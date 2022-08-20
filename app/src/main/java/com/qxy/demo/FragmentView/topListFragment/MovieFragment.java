@@ -53,8 +53,8 @@ public class MovieFragment extends Fragment {
         versionAdapter = new VersionAdapter(getContext());
         binding.movieVerSpinner.setAdapter(versionAdapter);
 
-        loadMovies();
-        loadVersion();
+//        loadMovies();
+//        loadVersion();
         binding.movieVerSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -98,6 +98,13 @@ public class MovieFragment extends Fragment {
                 adapter.setMovieList(movieList.getMovieList());
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadMovies();
+        loadVersion();
     }
 
     @Override

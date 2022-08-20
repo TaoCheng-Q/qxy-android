@@ -52,6 +52,9 @@ public class Video {
     @ColumnInfo(name = "share_count")
     private int share_count;
 
+    @ColumnInfo(name = "is_top")
+    private boolean is_top;
+
     public Video() {
     }
 
@@ -173,5 +176,13 @@ public class Video {
 
     public void setShare_count(int share_count) {
         this.share_count = share_count;
+    }
+
+    public boolean isIs_top() {
+        return is_top;
+    }
+
+    public void setIs_top(boolean is_top) {
+        this.is_top = is_top;
     }
 }

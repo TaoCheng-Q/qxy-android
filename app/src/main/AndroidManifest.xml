@@ -4,12 +4,12 @@
     package="com.qxy.demo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <queries>
-        <!--允许查询抖音和抖音极速版的信息-->
+
+        <!-- 允许查询抖音和抖音极速版的信息 -->
         <package android:name="com.ss.android.ugc.aweme" />
         <package android:name="com.ss.android.ugc.aweme.lite" />
     </queries>
@@ -26,13 +26,18 @@
         android:theme="@style/Theme.AndroidDemo"
         tools:targetApi="31">
         <activity
+            android:name=".FanActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".MainActivity"
@@ -48,9 +53,8 @@
             android:name=".douyinapi.DouYinEntryActivity"
             android:exported="true"
             android:launchMode="singleTask"
-            android:taskAffinity="com.qxy.demo">
+            android:taskAffinity="com.qxy.demo"></activity>
 
-        </activity>
         <receiver
             android:name=".StayInDyReceiver"
             android:exported="true">
@@ -59,16 +63,6 @@
                 <action android:name="com.aweme.opensdk.action.stay.in.dy.im" />
             </intent-filter>
         </receiver>
-
-<!--        <provider-->
-<!--            android:name="androidx.core.content.FileProvider"-->
-<!--            android:authorities="com.bytedance.sdk.share.demo.fileProvider"-->
-<!--            android:exported="false"-->
-<!--            android:grantUriPermissions="true">-->
-<!--            <meta-data-->
-<!--                android:name="android.support.FILE_PROVIDER_PATHS"-->
-<!--                android:resource="@xml/provider_paths"/>-->
-<!--        </provider>-->
     </application>
 
 </manifest>

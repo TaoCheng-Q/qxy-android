@@ -51,22 +51,23 @@ public class TopListViewModel extends ViewModel {
         public void onResponse(Call call, Response response) throws IOException {
             try {
                 JSONObject res = new JSONObject(new JSONObject(response.body().string()).getString("data"));
-                String token = res.getString("access_token");
-                if(token!=null && !token.equals("")){
-                    UserImformations.getInstance().setClient_token(token);
-                    switch (topListType){
-                        case 1:
-                            getMovieListMutableLiveData(-1);
-                            break;
-                        case 2:
-                            getTvListMutableLiveData(-1);
-                            break;
-                        case 3:
-                            getShowListMutableLiveData(-1);
-                            break;
-                    }
+                if(res.getInt("error_code")==0){
+                    String token = res.getString("access_token");
+                    if(!token.equals("")){
+                        UserImformations.getInstance().setClient_token(token);
+                        switch (topListType){
+                            case 1:
+                                getMovieListMutableLiveData(-1);
+                                break;
+                            case 2:
+                                getTvListMutableLiveData(-1);
+                                break;
+                            case 3:
+                                getShowListMutableLiveData(-1);
+                                break;
+                        }
                 }
-
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
