@@ -10,8 +10,14 @@ public class ShowList extends BaseObservable {
 
     private List<Show> showList;
 
+    private String active_time;
+
     public ShowList(List<Show> showList) {
         this.showList = showList;
+    }
+
+    public ShowList() {
+
     }
 
     public List<Show> getShowList() {
@@ -20,6 +26,15 @@ public class ShowList extends BaseObservable {
 
     public void setShowList(List<Show> showList) {
         this.showList = showList;
+        notifyChange();
+    }
+
+    public String getActive_time() {
+        return active_time;
+    }
+
+    public void setActive_time(String active_time) {
+        this.active_time = active_time;
         notifyChange();
     }
 }

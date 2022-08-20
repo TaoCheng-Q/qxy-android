@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.view.ViewGroup;
 
 import com.qxy.demo.R;
 import com.qxy.demo.adapter.topListAdapter.ShowAdapter;
+import com.qxy.demo.adapter.topListAdapter.TvAdapter;
 import com.qxy.demo.databinding.FragmentTVBinding;
 import com.qxy.demo.entity.topList.TvList;
 import com.qxy.demo.viewmodels.TopListViewModel;
@@ -28,7 +30,9 @@ public class TVFragment extends Fragment {
     private TopListViewModel mViewModel;
 
     private FragmentTVBinding binding;
-    private ShowAdapter adapter;
+    private TvAdapter adapter;
+//    选择榜单版本的时候修改
+    private int version=-1;
 
     public static TVFragment newInstance() {
         return new TVFragment();
@@ -38,20 +42,27 @@ public class TVFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 //        return inflater.inflate(R.layout.fragment_t_v, container, false);
-         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_shows, container, false);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_t_v, container, false);
         binding.tvList.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ShowAdapter(getContext());
+        adapter = new TvAdapter(getContext());
         binding.tvList.setAdapter(adapter);
         mViewModel = new ViewModelProvider(this).get(TopListViewModel.class);
-        loadShows();
+        loadTvs();
+        binding.tvRecycleView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                binding.tvRecycleView.setRefreshing(false);
+                loadTvs();
+            }
+        });
         return binding.getRoot();
     }
 
-    private void loadShows() {
-        mViewModel.getTvListMutableLiveData(-1).observe(getViewLifecycleOwner(), new Observer<TvList>() {
+    private void loadTvs() {
+        mViewModel.getTvListMutableLiveData(version).observe(getViewLifecycleOwner(), new Observer<TvList>() {
             @Override
             public void onChanged(TvList tvList) {
-
+                adapter.setTelevisionList(tvList.getTelevisionList());
             }
         });
     }

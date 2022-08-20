@@ -45,6 +45,7 @@
         </FrameLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/show_recycle_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4">

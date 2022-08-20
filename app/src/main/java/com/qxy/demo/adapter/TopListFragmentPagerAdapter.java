@@ -41,11 +41,11 @@ public class TopListFragmentPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return movieFragment;
+                return MovieFragment.newInstance();
             case 1:
-                return tvFragment;
+                return TVFragment.newInstance();
             case 2:
-                return showsFragment;
+                return ShowsFragment.newInstance();
         }
         return null;
     }

@@ -11,10 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
 import com.qxy.demo.R;
 import com.qxy.demo.adapter.topListAdapter.MovieAdapter;
@@ -28,6 +30,7 @@ public class MovieFragment extends Fragment {
     private TopListViewModel mViewModel;
     private FragmentMovieBinding binding;
     private MovieAdapter adapter;
+    private int version = -1;
 
     public static MovieFragment newInstance() {
         return new MovieFragment();
@@ -41,18 +44,27 @@ public class MovieFragment extends Fragment {
         binding.movieList.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.movieList.setAdapter(adapter);
         mViewModel = new ViewModelProvider(this).get(TopListViewModel.class);
+//        binding.movieVerSpinner.setAdapter(new ArrayAdapter<String>());
 
         loadMovies();
+
+        binding.movieRecycleView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                binding.movieRecycleView.setRefreshing(false);
+                loadMovies();
+            }
+        });
 
         return binding.getRoot();
 //        return inflater.inflate(R.layout.fragment_movie, container, false);
     }
 
     private void loadMovies() {
-        mViewModel.getMovieListMutableLiveData(-1).observe(getViewLifecycleOwner(), new Observer<MovieList>() {
+        mViewModel.getMovieListMutableLiveData(version).observe(getViewLifecycleOwner(), new Observer<MovieList>() {
             @Override
             public void onChanged(MovieList movieList) {
-
+                adapter.setMovieList(movieList.getMovieList());
             }
         });
     }

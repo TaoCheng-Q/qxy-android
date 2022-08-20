@@ -19,6 +19,8 @@ public class UserImformations {
 
     private String client_token;
 
+    private String refresh_token;
+
     public static UserImformations getInstance(){
         if(userImformations==null){
             userImformations = new UserImformations();
@@ -69,5 +71,13 @@ public class UserImformations {
 
     public void setClient_token(String client_token) {
         this.client_token = client_token;
+    }
+
+    public String getRefresh_token() {
+        return refresh_token;
+    }
+
+    public void setRefresh_token(String refresh_token) {
+        this.refresh_token = refresh_token;
     }
 }
