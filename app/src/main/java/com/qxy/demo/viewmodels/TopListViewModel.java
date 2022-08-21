@@ -167,7 +167,7 @@ public class TopListViewModel extends ViewModel {
                                 movieListMutableLiveData.postValue(ml);
                             }
                         }
-                    });
+                    }).start();
 
                 }
 
@@ -231,7 +231,7 @@ public class TopListViewModel extends ViewModel {
                                         movieListMutableLiveData.postValue(ml);
                                     }
                                 }
-                            });
+                            }).start();
 
                         }
                         //                ClientToken失效，需要重新获取
@@ -288,7 +288,7 @@ public class TopListViewModel extends ViewModel {
                                 tvListMutableLiveData.postValue(tl);
                             }
                         }
-                    });
+                    }).start();
 
                 }
 
@@ -336,7 +336,7 @@ public class TopListViewModel extends ViewModel {
                                         tvListMutableLiveData.postValue(tl);
                                     }
                                 }
-                            });
+                            }).start();
 
                         }
                         //                ClientToken失效，需要重新获取
@@ -376,7 +376,7 @@ public class TopListViewModel extends ViewModel {
                                 showListMutableLiveData.postValue(sl);
                             }
                         }
-                    });
+                    }).start();
 
                 }
 
@@ -424,7 +424,7 @@ public class TopListViewModel extends ViewModel {
                                         showListMutableLiveData.postValue(sl);
                                     }
                                 }
-                            });
+                            }).start();
 
                         }
                         //                ClientToken失效，需要重新获取

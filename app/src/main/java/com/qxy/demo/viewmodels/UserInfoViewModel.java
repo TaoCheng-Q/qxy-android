@@ -154,7 +154,7 @@ public class UserInfoViewModel extends ViewModel {
                                 douYinUserMutableLiveData.postValue(user.get(0));
                             }
                         }
-                    });
+                    }).start();
 
                 }
 
@@ -187,7 +187,7 @@ public class UserInfoViewModel extends ViewModel {
                                         douYinUserMutableLiveData.postValue(user.get(0));
                                     }
                                 }
-                            });
+                            }).start();
 
                         }
                         RequestDouYin.getClientToken(accessTokenCallback);
