@@ -39,12 +39,46 @@ public class RequestDouYin {
 
     public static String FANS_LIST="https://open.douyin.com/fans/list/";
 
+    public static String VIDEO_DATA="https://open.douyin.com/video/data/";
+
     public static int PAGE_COUNT=10;
+
+    public static void post(String url,Map<String,String> bodyMap,Map<String,String> paramMap,Map<String,String> headerMap,Callback callback){
+        OkHttpClient client = new OkHttpClient();
+        Request.Builder request = new Request.Builder();
+//        header参数
+        for (String item:
+                headerMap.keySet()) {
+            if(headerMap.get(item)!=null){
+                request.addHeader(item,headerMap.get(item));
+            }
+        }
+//        String url = TOP_LIST;
+//        url参数
+        url = url+"?";
+        for (String key: paramMap.keySet()){
+            if(paramMap.get(key)!=null){
+                url = url + key+"="+paramMap.get(key)+"&";
+            }
+        }
+        url = url.substring(0,url.length()-1);
+        request.url(url);
+//        body参数
+        FormBody.Builder requestBody = new FormBody.Builder();
+        for (String item: bodyMap.keySet()){
+            if(bodyMap.get(item)!=null){
+                requestBody.add(item,bodyMap.get(item));
+            }
+        }
+        request.post(requestBody.build());
+        client.newCall(request.build()).enqueue(callback);
+    }
 
     public static void getTopListVersion(int cursor,Callback callback){
 
     }
 
+//    get请求
     public static void getTopList(String url,Map<String,String> headerMap,Map<String,String> bodyMap,Callback callback){
         OkHttpClient client = new OkHttpClient();
         Request.Builder request = new Request.Builder();
@@ -64,6 +98,7 @@ public class RequestDouYin {
         client.newCall(request.build()).enqueue(callback);
     }
 
+//    获取ClientToken请求
     public static void getClientToken(Callback callback){
 //        OkhttpUtil
         Map<String,String> bodyMap = new HashMap<>();
@@ -75,6 +110,7 @@ public class RequestDouYin {
         requestToken(CLIENT_TOKEN,bodyMap,headerMap,callback);
     }
 
+//    封装的post请求
     public static void requestToken(String url, Map<String, String> bodyMap, Map<String, String> headerMap, Callback callback){
         OkHttpClient client = new OkHttpClient();
         FormBody.Builder body = new FormBody.Builder();
@@ -101,7 +137,8 @@ public class RequestDouYin {
     }
 
 
-    public void requestAccessToken(Callback callback){
+//    获取AccessToken请求
+    public static void requestAccessToken(Callback callback){
         OkHttpClient client = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
                 .add("client_key", UserImformations.getInstance().getKey())

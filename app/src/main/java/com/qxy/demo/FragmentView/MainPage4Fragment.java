@@ -95,5 +95,4 @@ public class MainPage4Fragment extends Fragment {
     }
 
 
-
 }

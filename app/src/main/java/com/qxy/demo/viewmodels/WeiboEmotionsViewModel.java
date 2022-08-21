@@ -47,7 +47,9 @@ public class WeiboEmotionsViewModel extends ViewModel {
             public void onFailure(Call call, Exception e) {
 //                获取本地数据
 //                Room.databaseBuilder(content, MyDataBase.class,"MyDataBase").build();
-                getEmotionsByRoom(fromIndex);
+                if(page==0){
+                    getEmotionsByRoom(fromIndex);
+                }
             }
 
             @Override
@@ -70,7 +72,9 @@ public class WeiboEmotionsViewModel extends ViewModel {
                         emotions.setWeiboEmotionsList(emotionsList);
                         emotionsLiveData.postValue(emotions);
                     }else{
-                        getEmotionsByRoom(fromIndex);
+                        if(page==0){
+                            getEmotionsByRoom(fromIndex);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

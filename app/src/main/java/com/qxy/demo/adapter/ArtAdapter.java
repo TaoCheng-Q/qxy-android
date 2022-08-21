@@ -12,15 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.qxy.demo.FragmentView.MainPage5Fragment;
 import com.qxy.demo.R;
 import com.qxy.demo.room.entity.Video;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ArtAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private List<Video> videoList;
+
+    private MainPage5Fragment.OnClickArtListListener onClickArtListListener;
 
     public ArtAdapter(Context context){
         this.context = context;
@@ -44,13 +48,29 @@ public class ArtAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ((ArtHolder) holder).binding(videoList.get(position));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onClickArtListListener!=null){
+                    List<String> artList = new ArrayList<>();
+                    for(int i=position;i<getItemCount();i++){
+                        artList.add(videoList.get(position).getItem_id());
+                    }
+                    onClickArtListListener.clickArt(position,artList);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return videoList==null?0:videoList.size();
+    }
+
+    public void setOnClickArtListListener(MainPage5Fragment.OnClickArtListListener onClickArtListListener) {
+        this.onClickArtListListener = onClickArtListListener;
     }
 
     public class ArtHolder extends RecyclerView.ViewHolder{

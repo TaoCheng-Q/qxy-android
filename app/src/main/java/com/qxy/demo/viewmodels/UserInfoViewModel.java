@@ -4,11 +4,14 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.qxy.demo.entity.VideoList;
+import com.qxy.demo.entity.topList.ShowList;
 import com.qxy.demo.models.RequestDouYin;
 import com.qxy.demo.room.entity.DouYinUser;
 import com.qxy.demo.room.entity.Video;
+import com.qxy.demo.room.entity.topListEntity.Show;
 import com.qxy.demo.utils.CallBackUtil;
 import com.qxy.demo.utils.OkhttpUtil;
+import com.qxy.demo.utils.RoomUtil;
 import com.qxy.demo.utils.UserImformations;
 
 import org.json.JSONArray;
@@ -26,12 +29,15 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class UserInfoViewModel extends ViewModel {
+//    记录是否第一次请求用户公开信息，判断是否需要从数据库中获取数据
+    private boolean firstTag=true;
 
+//    用户公开信息存放
     private MutableLiveData<DouYinUser> douYinUserMutableLiveData;
 
+//    视频列表信息存放
     private MutableLiveData<VideoList> videoListMutableLiveData;
-
-
+//    获取accessToken的回调
     private Callback accessTokenCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -45,6 +51,7 @@ public class UserInfoViewModel extends ViewModel {
                     JSONObject jsonObject = new JSONObject(response.body().string());
                     JSONObject json = new JSONObject(jsonObject.getString("data"));
                     if(json.getInt("error_code")==0){
+//                        成功获取到数据
                         UserImformations.getInstance().setToken(json.getString("access_token"));
                         try {
                             UserImformations.getInstance().setOpen_id(json.getString("open_id"));
@@ -63,6 +70,7 @@ public class UserInfoViewModel extends ViewModel {
         }
     };
 
+//    用户视频列表信息请求
     public MutableLiveData<VideoList> getVideoListMutableLiveData(int cursor){
         if(videoListMutableLiveData==null){
             videoListMutableLiveData=new MutableLiveData<>();
@@ -84,10 +92,12 @@ public class UserInfoViewModel extends ViewModel {
                     List<Video> videoList = new ArrayList<>();
                     JSONObject res = new JSONObject(new JSONObject(response).getString("data"));
                     if(res.getInt("error_code")==0){
+//                            成功获取到视频列表信息
                         videoListEntity.setHas_more(res.getBoolean("has_more"));
                         videoListEntity.setCursor(res.getInt("cursor"));
                         JSONArray array = new JSONArray(res.getString("list"));
                         for(int i=0;i<array.length();i++){
+
                             Video video = new Video();
                             JSONObject item  = (JSONObject) array.get(i);
                             video.setTitle(item.getString("title"));
@@ -106,10 +116,13 @@ public class UserInfoViewModel extends ViewModel {
                             video.setMedia_type(it.getInt("media_type"));
                             videoList.add(video);
                         }
-                        videoListEntity.setVideoList(videoList);
-                        videoListMutableLiveData.postValue(videoListEntity);
+                        if(!videoList.isEmpty()){
+                            videoListEntity.setVideoList(videoList);
+                            videoListMutableLiveData.postValue(videoListEntity);
+                        }
                     }else {
-
+//                        accessToken可能过期
+                        RequestDouYin.getClientToken(accessTokenCallback);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -120,6 +133,7 @@ public class UserInfoViewModel extends ViewModel {
         return videoListMutableLiveData;
     }
 
+//    用户公开信息请求
     public MutableLiveData<DouYinUser> getDouYinUserMutableLiveData(){
         if(douYinUserMutableLiveData==null){
             douYinUserMutableLiveData=new MutableLiveData<>();
@@ -129,6 +143,20 @@ public class UserInfoViewModel extends ViewModel {
         OkhttpUtil.okHttpPostJson(RequestDouYin.USERINFO, bodyJson, getHeaderMap(), new CallBackUtil.CallBackString() {
             @Override
             public void onFailure(Call call, Exception e) {
+                if(firstTag){
+//                    第一次请求失败后获取数据库数据
+                    firstTag=false;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<DouYinUser> user = RoomUtil.getInstance().getRoomInstance().getDouYinUserDao().queryDouYinUser();
+                            if(!user.isEmpty()){
+                                douYinUserMutableLiveData.postValue(user.get(0));
+                            }
+                        }
+                    });
+
+                }
 
             }
 
@@ -138,6 +166,7 @@ public class UserInfoViewModel extends ViewModel {
                     DouYinUser douYinUser = new DouYinUser();
                     JSONObject res = new JSONObject(new JSONObject(response).getString("data"));
                     if(res.getInt("error_code")==0){
+//                        成功获取到用户信息
                         douYinUser.setAvatar(res.getString("avatar"));
                         douYinUser.setCity(res.getString("city"));
                         douYinUser.setCountry(res.getString("country"));
@@ -147,6 +176,20 @@ public class UserInfoViewModel extends ViewModel {
                         douYinUser.setProvince(res.getString("province"));
                         douYinUserMutableLiveData.postValue(douYinUser);
                     }else {
+                        if(firstTag){
+//                    第一次请求失败后获取数据库数据
+                            firstTag=false;
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    List<DouYinUser> user = RoomUtil.getInstance().getRoomInstance().getDouYinUserDao().queryDouYinUser();
+                                    if(!user.isEmpty()){
+                                        douYinUserMutableLiveData.postValue(user.get(0));
+                                    }
+                                }
+                            });
+
+                        }
                         RequestDouYin.getClientToken(accessTokenCallback);
                     }
                 } catch (JSONException e) {
@@ -158,6 +201,7 @@ public class UserInfoViewModel extends ViewModel {
         return douYinUserMutableLiveData;
     }
 
+//    请求头参数
     private Map<String, String> getHeaderMap() {
         Map<String,String> header = new HashMap<>();
         header.put("Content-Type","application/json");

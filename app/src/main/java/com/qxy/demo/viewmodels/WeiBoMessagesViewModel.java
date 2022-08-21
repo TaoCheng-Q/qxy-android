@@ -44,14 +44,16 @@ public class WeiBoMessagesViewModel extends ViewModel {
             public void onFailure(Call call, Exception e) {
 //                获取本地数据
 //                Room.databaseBuilder(content, MyDataBase.class,"MyDataBase").build();
-                getMessagesByRoom(fromIndex);
+                if(page==0){
+                    getMessagesByRoom(fromIndex);
+                }
+
             }
 
             @Override
             public void onResponse(String response) {
                 try {
                     List<WeiBoMessage> weiBoMessageList = new ArrayList<>();
-
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray array = new JSONArray(jsonObject.getString("statuses"));
                     for(int i = fromIndex;i<Math.min(fromIndex+PAGE_COUNT ,array.length());i++){
@@ -59,7 +61,11 @@ public class WeiBoMessagesViewModel extends ViewModel {
                         WeiBoMessage weiBoMessage = new WeiBoMessage();
                         weiBoMessage.setCreated_at(item.getString("created_at"));
                         weiBoMessage.setCan_edit(item.getBoolean("can_edit"));
-                        weiBoMessage.setVersion(item.getInt("version"));
+                        try {
+                            weiBoMessage.setVersion(item.getInt("version"));
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
                         weiBoMessage.setText(item.getString("text"));
                         weiBoMessage.setTextLength(item.getInt("textLength"));
                         weiBoMessage.setSource_allowclick(item.getInt("source_allowclick"));
@@ -72,7 +78,10 @@ public class WeiBoMessagesViewModel extends ViewModel {
 //                        emotions.setWeiboEmotionsList(emotionsList);
                         weiBoMessageMutableLiveData.postValue(messageList);
                     }else{
-                        getMessagesByRoom(fromIndex);
+                        if(page==0){
+                            getMessagesByRoom(fromIndex);
+                        }
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

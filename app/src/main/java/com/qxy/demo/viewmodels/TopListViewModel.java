@@ -13,6 +13,7 @@ import com.qxy.demo.models.RequestDouYin;
 import com.qxy.demo.room.entity.topListEntity.Movie;
 import com.qxy.demo.room.entity.topListEntity.Show;
 import com.qxy.demo.room.entity.topListEntity.Television;
+import com.qxy.demo.utils.RoomUtil;
 import com.qxy.demo.utils.UserImformations;
 
 import org.json.JSONArray;
@@ -31,14 +32,24 @@ import okhttp3.Response;
 
 public class TopListViewModel extends ViewModel {
 
+    //    记录第一次请求，判断是否需要数据库的数据请求
+    private boolean firstMoviesTag = true;
+    private boolean firstTvsTag = true;
+    private boolean firstShowsTag = true;
+
+//    电影榜单数据存放
     private MutableLiveData<MovieList> movieListMutableLiveData;
 
+//    电视剧榜单数据存放
     private MutableLiveData<TvList> tvListMutableLiveData;
 
+//    shows榜单数据存放
     private MutableLiveData<ShowList> showListMutableLiveData;
 
+//    版本信息数据存放
     private MutableLiveData<VersionList> versionListMutableLiveData;
 
+//    默认初始化为电视剧
     private int topListType = 2;
 
     private Callback clientCallback = new Callback() {
@@ -52,6 +63,7 @@ public class TopListViewModel extends ViewModel {
             try {
                 JSONObject res = new JSONObject(new JSONObject(response.body().string()).getString("data"));
                 if(res.getInt("error_code")==0){
+//                    获取ClientToken数据成功后，重新请求榜单数据
                     String token = res.getString("access_token");
                     if(!token.equals("")){
                         UserImformations.getInstance().setClient_token(token);
@@ -75,6 +87,7 @@ public class TopListViewModel extends ViewModel {
         }
     };
 
+//    请求版本信息，所有的榜单通用
     public MutableLiveData<VersionList> getVersionListMutableLiveData(int type,int cursor,int page_count){
         if(versionListMutableLiveData==null){
             versionListMutableLiveData=new MutableLiveData<>();
@@ -93,6 +106,7 @@ public class TopListViewModel extends ViewModel {
                     List<Integer> integers = new ArrayList<>();
                     JSONObject res = new JSONObject(new JSONObject(response.body().string()).getString("data"));
                     if(res.getInt("error_code")==0){
+//                        榜单信息获取成功
                         versionList.setCursor(res.getInt("cursor"));
                         versionList.setHasMore(res.getBoolean("has_more"));
                         JSONArray array = new JSONArray(res.getString("list"));
@@ -100,8 +114,10 @@ public class TopListViewModel extends ViewModel {
                             JSONObject item = (JSONObject) array.get(i);
                             integers.add(item.getInt("version"));
                         }
-                        versionList.setIntegerList(integers);
-                        versionListMutableLiveData.postValue(versionList);
+                        if(!integers.isEmpty()){
+                            versionList.setIntegerList(integers);
+                            versionListMutableLiveData.postValue(versionList);
+                        }
                     }else {
 //                        topListType=4;
 //                        RequestDouYin.getClientToken(clientCallback);
@@ -125,6 +141,7 @@ public class TopListViewModel extends ViewModel {
         return bodyMap;
     }
 
+//    电影榜单通过版本请求数据，版本为-1的时候默认考虑本周
     public MutableLiveData<MovieList> getMovieListMutableLiveData(int version){
 
         if(movieListMutableLiveData==null){
@@ -137,6 +154,22 @@ public class TopListViewModel extends ViewModel {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.d("TAG", "onFailure: xxxxxxxxxxxxx");
+                if(firstMoviesTag){
+                    //                    第一次请求失败后获取数据库数据
+                    firstMoviesTag=false;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<Movie> movies = RoomUtil.getInstance().getRoomInstance().getMovieDao().queryMovies();
+                            if(!movies.isEmpty()){
+                                MovieList ml = new MovieList();
+                                ml.setMovieList(movies);
+                                movieListMutableLiveData.postValue(ml);
+                            }
+                        }
+                    });
+
+                }
 
             }
 
@@ -185,6 +218,22 @@ public class TopListViewModel extends ViewModel {
                         Log.d("TopListViewModel", "onResponse: "+movieList.getMovieList().size());
                         movieListMutableLiveData.postValue(movieList);
                     }else {
+                        if(firstMoviesTag){
+                            //                    第一次请求失败后获取数据库数据
+                            firstMoviesTag=false;
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    List<Movie> movies = RoomUtil.getInstance().getRoomInstance().getMovieDao().queryMovies();
+                                    if(!movies.isEmpty()){
+                                        MovieList ml = new MovieList();
+                                        ml.setMovieList(movies);
+                                        movieListMutableLiveData.postValue(ml);
+                                    }
+                                }
+                            });
+
+                        }
                         //                ClientToken失效，需要重新获取
                         topListType=1;
                         RequestDouYin.getClientToken(clientCallback);
@@ -215,6 +264,7 @@ public class TopListViewModel extends ViewModel {
         return headerMap;
     }
 
+//    电视剧榜单请求
     public MutableLiveData<TvList> getTvListMutableLiveData(int version){
         if(tvListMutableLiveData==null){
             tvListMutableLiveData=new MutableLiveData<>();
@@ -224,6 +274,23 @@ public class TopListViewModel extends ViewModel {
         RequestDouYin.getTopList(RequestDouYin.TOP_LIST,getHeaderMap(), getBodyMap("2",version), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
+                if(firstTvsTag){
+//                    第一次请求失败后获取数据库数据
+                    firstTvsTag=false;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<Television> tvs = RoomUtil.getInstance().getRoomInstance().getTelevisionDao().queryTelevisions();
+                            if(!tvs.isEmpty()){
+                                TvList tl = new TvList();
+                                tl.setTelevisionList(tvs);
+                                tvListMutableLiveData.postValue(tl);
+                            }
+                        }
+                    });
+
+                }
 
             }
 
@@ -256,6 +323,22 @@ public class TopListViewModel extends ViewModel {
                         tvListEntity.setTelevisionList(televisionList);
                         tvListMutableLiveData.postValue(tvListEntity);
                     }else {
+                        if(firstTvsTag){
+//                    第一次请求失败后获取数据库数据
+                            firstTvsTag=false;
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    List<Television> tvs = RoomUtil.getInstance().getRoomInstance().getTelevisionDao().queryTelevisions();
+                                    if(!tvs.isEmpty()){
+                                        TvList tl = new TvList();
+                                        tl.setTelevisionList(tvs);
+                                        tvListMutableLiveData.postValue(tl);
+                                    }
+                                }
+                            });
+
+                        }
                         //                ClientToken失效，需要重新获取
                         topListType=2;
                         RequestDouYin.getClientToken(clientCallback);
@@ -271,6 +354,7 @@ public class TopListViewModel extends ViewModel {
         return tvListMutableLiveData;
     }
 
+//    shows榜单请求
     public MutableLiveData<ShowList> getShowListMutableLiveData(int version){
         if (showListMutableLiveData==null){
             showListMutableLiveData=new MutableLiveData<>();
@@ -279,6 +363,22 @@ public class TopListViewModel extends ViewModel {
         RequestDouYin.getTopList(RequestDouYin.TOP_LIST,getHeaderMap(), getBodyMap("3",version), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                if(firstShowsTag){
+//                    第一次请求失败后获取数据库数据
+                    firstShowsTag=false;
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<Show> shows = RoomUtil.getInstance().getRoomInstance().getShowDao().queryShows();
+                            if(!shows.isEmpty()){
+                                ShowList sl = new ShowList();
+                                sl.setShowList(shows);
+                                showListMutableLiveData.postValue(sl);
+                            }
+                        }
+                    });
+
+                }
 
             }
 
@@ -311,6 +411,22 @@ public class TopListViewModel extends ViewModel {
                         showListEntity.setShowList(showList);
                         showListMutableLiveData.postValue(showListEntity);
                     }else {
+                        if(firstShowsTag){
+//                    第一次请求失败后获取数据库数据
+                            firstShowsTag=false;
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    List<Show> shows = RoomUtil.getInstance().getRoomInstance().getShowDao().queryShows();
+                                    if(!shows.isEmpty()){
+                                        ShowList sl = new ShowList();
+                                        sl.setShowList(shows);
+                                        showListMutableLiveData.postValue(sl);
+                                    }
+                                }
+                            });
+
+                        }
                         //                ClientToken失效，需要重新获取
                         topListType=3;
                         RequestDouYin.getClientToken(clientCallback);

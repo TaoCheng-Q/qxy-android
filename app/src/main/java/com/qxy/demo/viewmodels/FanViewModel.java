@@ -24,6 +24,8 @@ import okhttp3.Call;
 public class FanViewModel extends ViewModel {
     // TODO: Implement the ViewModel
     private MutableLiveData<FansList> fansListMutableLiveData,followsListMutableLiveData;
+//    记录第一次请求，判断是否需要数据库的数据请求
+    private boolean firstTag = true;
 
 //    获取粉丝列表
     public MutableLiveData<FansList> getFansListMutableLiveData(int cursor){
@@ -38,7 +40,7 @@ public class FanViewModel extends ViewModel {
 
             @Override
             public void onResponse(String response) {
-                paserJsonString(response);
+                paserJsonString(response,fansListMutableLiveData,this);
             }
         });
 
@@ -74,7 +76,7 @@ public class FanViewModel extends ViewModel {
 
             @Override
             public void onResponse(String response) {
-                paserJsonString(response);
+                paserJsonString(response,followsListMutableLiveData,this);
 //                try {
 //                    FansList fansListEntity=new FansList();
 //                    List<Fans> fansList =new ArrayList<>();
@@ -108,7 +110,7 @@ public class FanViewModel extends ViewModel {
         return followsListMutableLiveData;
     }
 
-    private void paserJsonString(String response) {
+    private void paserJsonString(String response,MutableLiveData<FansList> mutableLiveData,CallBackUtil.CallBackString call) {
         try {
             FansList fansListEntity=new FansList();
             List<Fans> fansList =new ArrayList<>();
@@ -128,8 +130,10 @@ public class FanViewModel extends ViewModel {
                     fans.setGender(item.getInt("gender"));
                     fansList.add(fans);
                 }
-                fansListEntity.setFansList(fansList);
-                followsListMutableLiveData.setValue(fansListEntity);
+                if(!fansList.isEmpty()){
+                    fansListEntity.setFansList(fansList);
+                    mutableLiveData.setValue(fansListEntity);
+                }
             }else {
 
             }
