@@ -83,15 +83,15 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         }
 
         public void binding(Movie movie){
-            movie_actor.setText(movie.getActors());
-            movie_director.setText(movie.getDirectors());
-            movie_name.setText(movie.getName());
-            movie_discuss_pop.setText(movie.getDiscussion_hot());
-            movie_rel_area.setText(movie.getAreas());
-            movie_influence_pop.setText(movie.getInfluence_hot());
-            movie_rel_time.setText(movie.getRelease_date());
-            movie_theme_pop.setText(movie.getTopic_hot());
-            movie_search_pop.setText(movie.getSearch_hot());
+            movie_actor.setText("演员："+movie.getActors());
+            movie_director.setText("导演："+movie.getDirectors());
+            movie_name.setText("片名："+movie.getName());
+            movie_discuss_pop.setText("讨论热度："+movie.getDiscussion_hot()+"°C");
+            movie_rel_area.setText("区域："+movie.getAreas());
+            movie_influence_pop.setText("影响力："+movie.getInfluence_hot());
+            movie_rel_time.setText("上映时间："+movie.getRelease_date());
+            movie_theme_pop.setText("话题热度："+movie.getTopic_hot());
+            movie_search_pop.setText("搜索指数："+movie.getSearch_hot());
             Glide
                     .with(itemView.getContext())
                     .load(movie.getPoster())

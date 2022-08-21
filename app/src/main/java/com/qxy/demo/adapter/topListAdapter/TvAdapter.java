@@ -92,17 +92,17 @@ public class TvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .with(itemView.getContext())
                     .load(television.getPoster())
                     .into(tv_cover);
-            tv_actor.setText(television.getActors());
-                    tv_name.setText(television.getName());
-                    tv_en_name.setText(television.getName_en());
-                    tv_director.setText(television.getDirectors());
-//                    tv_rel_area.setText(television.get);
-                    tv_rel_time.setText(television.getRelease_date());
-//                    tv_tag.setText(television.);
-                    tv_discuss_pop.setText(television.getDiscussion_hot());
-                    tv_influence_pop.setText(television.getInfluence_hot());
-                    tv_search_pop.setText(television.getSearch_hot());
-                    tv_theme_pop.setText(television.getTopic_hot());
+            tv_actor.setText("演员："+television.getActors());
+            tv_name.setText("片名："+television.getName());
+            tv_en_name.setText(television.getName_en());
+            tv_director.setText("导演："+television.getDirectors());
+//                   tv_rel_area.setText(television.get);
+            tv_rel_time.setText("发布时间"+television.getRelease_date());
+//                   tv_tag.setText(television.);
+            tv_discuss_pop.setText("讨论热度："+television.getDiscussion_hot());
+            tv_influence_pop.setText("影响力："+television.getInfluence_hot());
+            tv_search_pop.setText("搜索指数："+television.getSearch_hot());
+            tv_theme_pop.setText("话题热度："+television.getTopic_hot());
 
         }
     }

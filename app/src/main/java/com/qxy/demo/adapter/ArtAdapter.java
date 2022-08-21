@@ -94,10 +94,10 @@ public class ArtAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .with(itemView.getContext())
                     .load(video.getCover())
                     .into(art_thumbnail);
-            art_title.setText(video.getTitle());
-            art_comment_num.setText(video.getComment_count());
-            art_post_time.setText(video.getCreate_time());
-            art_video_view.setText(video.getPlay_count());
+            art_title.setText("名称："+video.getTitle());
+            art_comment_num.setText("评论数："+video.getComment_count());
+            art_post_time.setText("发布时间："+video.getCreate_time());
+            art_video_view.setText("播放："+video.getPlay_count());
             art_is_top.setText(video.isIs_top()?"是":"否");
         }
 

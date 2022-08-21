@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/movie_cover"
@@ -16,6 +16,7 @@
         >
 
         <TextView
+            android:maxLength="10"
             android:id="@+id/movie_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,16 +24,18 @@
             android:layout_alignParentTop="true"
             android:text="电影名"
             android:textSize="18sp" />
+
         <TextView
             android:id="@+id/movie_actor"
+            android:maxLength="10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/movie_name"
             android:layout_alignLeft="@id/movie_name"
             android:text="演员一、演员二"
-            android:textSize="18sp"
-            />
+            android:textSize="18sp" />
         <TextView
+            android:maxLength="10"
             android:id="@+id/movie_director"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

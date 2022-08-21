@@ -83,14 +83,14 @@ public class ShowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     .with(itemView.getContext())
                     .load(show.getPoster())
                     .into(shows_cover);
-            shows_name.setText(show.getName());
+            shows_name.setText("片名："+show.getName());
             shows_en_name.setText(show.getName_en());
-            shows_director.setText(show.getDirectors());
-            shows_discuss_pop.setText(show.getDiscussion_hot());
-            shows_theme_pop.setText(show.getTopic_hot());
-            shows_search_pop.setText(show.getSearch_hot());
-            shows_influence_pop.setText(show.getInfluence_hot());
-            shows_data.setText(show.getRelease_date());
+            shows_director.setText("导演"+show.getDirectors());
+            shows_discuss_pop.setText("讨论热度："+show.getDiscussion_hot());
+            shows_theme_pop.setText("话题热度："+show.getTopic_hot());
+            shows_search_pop.setText("搜索指数："+show.getSearch_hot());
+            shows_influence_pop.setText("影响力："+show.getInfluence_hot());
+            shows_data.setText("发布时间："+show.getRelease_date());
         }
     }
 }

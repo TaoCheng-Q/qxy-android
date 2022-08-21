@@ -69,7 +69,7 @@ public class FanItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .with(itemView.getContext())
                     .load(fans.getAvatar())
                     .into(ff_avatar);
-            ff_nickname.setText(fans.getNickname());
+            ff_nickname.setText("昵称："+fans.getNickname());
             switch (fans.getGender()){
                 case 0:
                     ff_sex.setText("未知");
@@ -81,9 +81,9 @@ public class FanItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     ff_sex.setText("女");
                     break;
             }
-            ff_city.setText(fans.getCity());
-            ff_province.setText(fans.getProvince());
-            ff_country.setText(fans.getCountry());
+            ff_city.setText("城市："+fans.getCity());
+            ff_province.setText("省份："+fans.getProvince());
+            ff_country.setText("国家："+fans.getCountry());
         }
     }
 }
