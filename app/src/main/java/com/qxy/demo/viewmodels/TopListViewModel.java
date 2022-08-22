@@ -214,9 +214,12 @@ public class TopListViewModel extends ViewModel {
                             movie.setTopic_hot(item.getString("topic_hot"));
                             movies.add(movie);
                         }
-                        movieList.setMovieList(movies);
-                        Log.d("TopListViewModel", "onResponse: "+movieList.getMovieList().size());
-                        movieListMutableLiveData.postValue(movieList);
+                        if(!movies.isEmpty()){
+                            movieList.setMovieList(movies);
+                            Log.d("TopListViewModel", "onResponse: "+movieList.getMovieList().size());
+                            movieListMutableLiveData.postValue(movieList);
+                        }
+
                     }else {
                         if(firstMoviesTag){
                             //                    第一次请求失败后获取数据库数据
@@ -320,8 +323,11 @@ public class TopListViewModel extends ViewModel {
                             television.setTopic_hot(item.getString("topic_hot"));
                             televisionList.add(television);
                         }
-                        tvListEntity.setTelevisionList(televisionList);
-                        tvListMutableLiveData.postValue(tvListEntity);
+                        if(!televisionList.isEmpty()){
+                            tvListEntity.setTelevisionList(televisionList);
+                            tvListMutableLiveData.postValue(tvListEntity);
+                        }
+
                     }else {
                         if(firstTvsTag){
 //                    第一次请求失败后获取数据库数据
@@ -408,8 +414,11 @@ public class TopListViewModel extends ViewModel {
                             show.setTopic_hot(item.getString("topic_hot"));
                             showList.add(show);
                         }
-                        showListEntity.setShowList(showList);
-                        showListMutableLiveData.postValue(showListEntity);
+                        if(!showList.isEmpty()){
+                            showListEntity.setShowList(showList);
+                            showListMutableLiveData.postValue(showListEntity);
+                        }
+
                     }else {
                         if(firstShowsTag){
 //                    第一次请求失败后获取数据库数据

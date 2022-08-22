@@ -165,6 +165,9 @@ public class MainPage2Fragment extends Fragment {
                     if(page==0){
                         emotionsList.clear();
                     }
+                    if(emotionsList.containsAll(weiboEmotions.getWeiboEmotionsList())){
+                        return;
+                    }
                     emotionsList.addAll(weiboEmotions.getWeiboEmotionsList());
                     if (weiboEmotions.getWeiboEmotionsList().size()<weiboEmotionsViewModel.PAGE_COUNT){
                         hasNextPage=false;

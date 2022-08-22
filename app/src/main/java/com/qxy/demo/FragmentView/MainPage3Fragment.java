@@ -145,6 +145,9 @@ public class MainPage3Fragment extends Fragment {
                     if(page==0){
                         messageList.clear();
                     }
+                    if(messageList.containsAll(weiBoMessageList.getWeiBoMessageList())){
+                        return;
+                    }
                     messageList.addAll(weiBoMessageList.getWeiBoMessageList());
                     if (weiBoMessageList.getWeiBoMessageList().size()<weiBoMessagesViewModel.PAGE_COUNT){
                         hasNextPage=false;
