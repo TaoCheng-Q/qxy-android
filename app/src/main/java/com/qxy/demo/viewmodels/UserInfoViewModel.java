@@ -122,7 +122,7 @@ public class UserInfoViewModel extends ViewModel {
                         }
                     }else {
 //                        accessToken可能过期
-                        RequestDouYin.getClientToken(accessTokenCallback);
+//                        RequestDouYin.getClientToken(accessTokenCallback);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

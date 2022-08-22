@@ -105,13 +105,14 @@ public class MainPage5Fragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_page5, container, false);
 //        个人短视频展示，适配器
         artAdapter = new ArtAdapter(getContext());
-//        设置列表的监听对象
+//        设置视频列表的监听对象
         artAdapter.setOnClickArtListListener(onClickArtListListener);
         binding.artList.setLayoutManager(new LinearLayoutManager(getContext()));
         userInfoViewModel = new ViewModelProvider(this).get(UserInfoViewModel.class);
+        binding.artList.setAdapter(artAdapter);
 //        请求获取短视频数据
         loadArt();
-        binding.artList.setAdapter(artAdapter);
+
 //        请求获取用户公开信息
         loadUerInfo();
         Intent intent =new Intent(getActivity(), FanActivity.class);
