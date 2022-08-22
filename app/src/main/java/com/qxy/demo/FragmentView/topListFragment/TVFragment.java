@@ -113,6 +113,9 @@ public class TVFragment extends Fragment {
             @Override
             public void onChanged(VersionList versionList) {
 //                数据加载成功刷新版本列表显示
+                if(adapterVersionList.containsAll(versionList.getIntegerList())){
+                    return;
+                }
                 adapterVersionList.addAll(versionList.getIntegerList());
                 versionAdapter.setIntegerList(adapterVersionList);
                 cursor=versionList.getCursor();
@@ -127,6 +130,9 @@ public class TVFragment extends Fragment {
             @Override
             public void onChanged(TvList tvList) {
 //                数据加载成功刷新榜单数据显示
+                if (adapterTvList.containsAll(tvList.getTelevisionList())){
+                    return;
+                }
                 adapterTvList.addAll(tvList.getTelevisionList());
                 adapter.setTelevisionList(adapterTvList);
             }

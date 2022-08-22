@@ -26,6 +26,8 @@ public class WeiBoMessagesViewModel extends ViewModel {
     String WEIBO_EMOTIONS_URL="https://api.weibo.com/2/statuses/home_timeline.json";
     String WEIBO_ACCESS_TOKEN = "2.00gImvyHeoJoOEd591163c9aKmi6wB";
 
+    private boolean firstTag =true;
+
 
     private MutableLiveData<WeiBoMessageList> weiBoMessageMutableLiveData ;
 
@@ -44,7 +46,8 @@ public class WeiBoMessagesViewModel extends ViewModel {
             public void onFailure(Call call, Exception e) {
 //                获取本地数据
 //                Room.databaseBuilder(content, MyDataBase.class,"MyDataBase").build();
-                if(page==0){
+                if(firstTag){
+                    firstTag=false;
                     getMessagesByRoom(fromIndex);
                 }
 
@@ -67,7 +70,12 @@ public class WeiBoMessagesViewModel extends ViewModel {
                             e.printStackTrace();
                         }
                         weiBoMessage.setText(item.getString("text"));
-                        weiBoMessage.setTextLength(item.getInt("textLength"));
+                        try {
+                            weiBoMessage.setTextLength(item.getInt("textLength"));
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+
                         weiBoMessage.setSource_allowclick(item.getInt("source_allowclick"));
                         weiBoMessage.setSource_type(item.getInt("source_type"));
                         weiBoMessage.setSource(item.getString("source"));
@@ -78,7 +86,8 @@ public class WeiBoMessagesViewModel extends ViewModel {
 //                        emotions.setWeiboEmotionsList(emotionsList);
                         weiBoMessageMutableLiveData.postValue(messageList);
                     }else{
-                        if(page==0){
+                        if(firstTag){
+                            firstTag=false;
                             getMessagesByRoom(fromIndex);
                         }
 

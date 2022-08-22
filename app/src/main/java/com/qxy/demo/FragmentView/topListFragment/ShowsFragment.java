@@ -117,6 +117,9 @@ public class ShowsFragment extends Fragment {
             @Override
             public void onChanged(VersionList versionList) {
 //                数据获取成功后刷新版本数据
+                if (adapterVersionList.containsAll(versionList.getIntegerList())){
+                    return;
+                }
                 adapterVersionList.addAll(versionList.getIntegerList());
                 versionAdapter.setIntegerList(adapterVersionList);
                 cursor=versionList.getCursor();
@@ -131,6 +134,9 @@ public class ShowsFragment extends Fragment {
             @Override
             public void onChanged(ShowList showList) {
 //                信息更新成功后刷新榜单显示
+                if(adapterShowList.containsAll(showList.getShowList())){
+                    return;
+                }
                 adapterShowList.addAll(showList.getShowList());
                 adapter.setShowList(adapterShowList);
             }

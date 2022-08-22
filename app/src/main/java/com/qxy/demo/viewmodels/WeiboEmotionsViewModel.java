@@ -29,6 +29,8 @@ public class WeiboEmotionsViewModel extends ViewModel {
     String WEIBO_EMOTIONS_URL="https://api.weibo.com/2/emotions.json";
     String WEIBO_ACCESS_TOKEN = "2.00gImvyHeoJoOEd591163c9aKmi6wB";
 
+    private boolean firstTag = true;
+
 
     private MutableLiveData<WeiboEmotions> emotionsLiveData ;
 
@@ -47,8 +49,9 @@ public class WeiboEmotionsViewModel extends ViewModel {
             public void onFailure(Call call, Exception e) {
 //                获取本地数据
 //                Room.databaseBuilder(content, MyDataBase.class,"MyDataBase").build();
-                if(page==0){
+                if(firstTag){
                     getEmotionsByRoom(fromIndex);
+                    firstTag=false;
                 }
             }
 
@@ -72,7 +75,8 @@ public class WeiboEmotionsViewModel extends ViewModel {
                         emotions.setWeiboEmotionsList(emotionsList);
                         emotionsLiveData.postValue(emotions);
                     }else{
-                        if(page==0){
+                        if(firstTag){
+                            firstTag=false;
                             getEmotionsByRoom(fromIndex);
                         }
                     }

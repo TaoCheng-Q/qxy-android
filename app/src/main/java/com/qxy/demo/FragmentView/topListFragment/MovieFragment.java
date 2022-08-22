@@ -115,6 +115,9 @@ public class MovieFragment extends Fragment {
             @Override
             public void onChanged(VersionList versionList) {
 //                信息加载成功后刷新数据显示
+                if(adapterVersionList.containsAll(versionList.getIntegerList())){
+                    return;
+                }
                 adapterVersionList.addAll(versionList.getIntegerList());
                 versionAdapter.setIntegerList(adapterVersionList);
 //                记录当前版本列表页的游标
@@ -130,6 +133,9 @@ public class MovieFragment extends Fragment {
             @Override
             public void onChanged(MovieList movieList) {
 //                榜单数据刷新后更新榜单数据显示
+                if(adapterMovieList.containsAll(movieList.getMovieList())){
+                    return;
+                }
                 adapterMovieList.addAll(movieList.getMovieList());
                 adapter.setMovieList(adapterMovieList);
             }

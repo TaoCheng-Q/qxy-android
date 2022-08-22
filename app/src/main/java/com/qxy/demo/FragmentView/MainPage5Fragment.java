@@ -25,6 +25,7 @@ import com.qxy.demo.databinding.FragmentMainPage5Binding;
 import com.qxy.demo.entity.VideoList;
 import com.qxy.demo.room.dao.DouYinUserDao;
 import com.qxy.demo.room.entity.DouYinUser;
+import com.qxy.demo.room.entity.Video;
 import com.qxy.demo.utils.RoomUtil;
 import com.qxy.demo.viewmodels.UserInfoViewModel;
 
@@ -65,6 +66,7 @@ public class MainPage5Fragment extends Fragment {
         }
     };
     private DouYinUser user;
+    private List<Video> adapterVideoList = new ArrayList<>();
 
     public MainPage5Fragment() {
         // Required empty public constructor
@@ -173,7 +175,11 @@ public class MainPage5Fragment extends Fragment {
             @Override
             public void onChanged(VideoList videoList) {
 //                数据加载成功后刷新列表显示
-                artAdapter.setVideoList(videoList.getVideoList());
+                if(adapterVideoList.containsAll(videoList.getVideoList())){
+                    return;
+                }
+                adapterVideoList = videoList.getVideoList();
+                artAdapter.setVideoList(adapterVideoList);
                 cursor = videoList.getCursor();
             }
         });

@@ -58,7 +58,12 @@ public class UserInfoViewModel extends ViewModel {
                         }catch (Exception e){
 
                         }
-                        UserImformations.getInstance().setRefresh_token(json.getString("refresh_token"));
+                        try{
+                            UserImformations.getInstance().setRefresh_token(json.getString("refresh_token"));
+                        }catch (Exception e){
+
+                        }
+
                         getDouYinUserMutableLiveData();
                     }else {
 

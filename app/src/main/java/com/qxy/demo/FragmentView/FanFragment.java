@@ -20,7 +20,11 @@ import com.qxy.demo.R;
 import com.qxy.demo.adapter.FanItemAdapter;
 import com.qxy.demo.databinding.FragmentFanBinding;
 import com.qxy.demo.entity.FansList;
+import com.qxy.demo.room.entity.Fans;
 import com.qxy.demo.viewmodels.FanViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FanFragment extends Fragment {
 
@@ -29,6 +33,7 @@ public class FanFragment extends Fragment {
     private FragmentFanBinding binding;
     private FanItemAdapter adapter;
     private int cursor=0;
+    private List<Fans> adapterFansList =new ArrayList<>();
 
     private FanFragment(int position){
         this.position=position;
@@ -64,7 +69,11 @@ public class FanFragment extends Fragment {
             mViewModel.getFansListMutableLiveData(cursor).observe(getViewLifecycleOwner(), new Observer<FansList>() {
                 @Override
                 public void onChanged(FansList fansList) {
-                    adapter.setFansList(fansList.getFansList());
+                    if(adapterFansList.containsAll(fansList.getFansList())){
+                        return;
+                    }
+                    adapterFansList = fansList.getFansList();
+                    adapter.setFansList(adapterFansList);
                     cursor=fansList.getCursor();
                 }
             });
