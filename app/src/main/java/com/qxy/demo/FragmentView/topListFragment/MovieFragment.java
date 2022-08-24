@@ -46,11 +46,11 @@ public class MovieFragment extends Fragment {
 //    分页游标默认为0；
     private int cursor =0;
 //    版本列表显示数据
-    private List<Integer> adapterVersionList = new ArrayList<>();
+    private final List<Integer> adapterVersionList = new ArrayList<>();
 //    榜单列表显示数据
-    private List<Movie> adapterMovieList = new ArrayList<>();
-//    榜单选择事件接口实现
-    private AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
+    private final List<Movie> adapterMovieList = new ArrayList<>();
+//    榜单列表选择事件接口实现
+    private final AdapterView.OnItemSelectedListener onItemSelectedListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 //            选择后确定选择的版本信息，并且刷新榜单数据
@@ -65,7 +65,7 @@ public class MovieFragment extends Fragment {
         }
     };
 //    榜单下拉刷新事件接口实现
-    private SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+    private final SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
 //                实现下拉刷新事件，刷新数据
@@ -134,6 +134,7 @@ public class MovieFragment extends Fragment {
             public void onChanged(MovieList movieList) {
 //                榜单数据刷新后更新榜单数据显示
                 if(adapterMovieList.containsAll(movieList.getMovieList())){
+//                    数据重复则不刷新数据显示
                     return;
                 }
                 adapterMovieList.addAll(movieList.getMovieList());
@@ -153,6 +154,7 @@ public class MovieFragment extends Fragment {
     public void onPause() {
         super.onPause();
         if (!adapterMovieList.isEmpty()){
+//            数据暂存至数据库中
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {

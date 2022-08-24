@@ -11,6 +11,12 @@ import com.qxy.demo.FragmentView.topListFragment.ShowsFragment;
 import com.qxy.demo.FragmentView.topListFragment.TVFragment;
 
 public class TopListFragmentPagerAdapter extends FragmentStateAdapter {
+//    电影榜单页
+    public static int MOVIE_PAGE=0;
+//    电视剧榜单页
+    public static int TV_PAGE=1;
+//    show榜单页
+    public static int SHOW_PAGE=3;
 
     private int PAGE_COUNT = 3;
     private MovieFragment movieFragment;
@@ -41,10 +47,13 @@ public class TopListFragmentPagerAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
+//                电影榜单页
                 return MovieFragment.newInstance();
             case 1:
+//                电视剧榜单页
                 return TVFragment.newInstance();
             case 2:
+//                show榜单页
                 return ShowsFragment.newInstance();
         }
         return null;

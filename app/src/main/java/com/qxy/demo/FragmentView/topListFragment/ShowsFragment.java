@@ -153,7 +153,7 @@ public class ShowsFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-//        存放数据库
+//        数据存放数据库
         if (!adapterShowList.isEmpty()){
             Thread thread = new Thread(new Runnable() {
                 @Override

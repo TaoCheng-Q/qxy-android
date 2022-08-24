@@ -8,6 +8,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.qxy.demo.FragmentView.FanFragment;
 
 public class FanPageAdapter extends FragmentStateAdapter {
+//    关注列表页
+    public static int FOLLOWS_PAGE=0;
+//    粉丝列表页
+    public static int FANS_PAGE=1;
 
     private int PAG_COUNT=2;
     private FanFragment followFragment;

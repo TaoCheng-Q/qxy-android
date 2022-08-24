@@ -52,6 +52,7 @@ public class TopListViewModel extends ViewModel {
 //    默认初始化为电视剧
     private int topListType = 2;
 
+//    获取accesstoken请求回调
     private Callback clientCallback = new Callback() {
         @Override
         public void onFailure(Call call, IOException e) {
@@ -155,7 +156,7 @@ public class TopListViewModel extends ViewModel {
             public void onFailure(Call call, IOException e) {
                 Log.d("TAG", "onFailure: xxxxxxxxxxxxx");
                 if(firstMoviesTag){
-                    //                    第一次请求失败后获取数据库数据
+//                第一次请求失败后获取数据库数据
                     firstMoviesTag=false;
                     new Thread(new Runnable() {
                         @Override
@@ -181,6 +182,7 @@ public class TopListViewModel extends ViewModel {
                     JSONObject res = new JSONObject(new JSONObject(response.body().string()).getString("data"));
 //                    Log.d("TAG", "onResponse: "+res.toString());
                     if(res.getInt("error_code")==0){
+//                        电影榜单获取成功
                         movieList.setActive_time(res.getString("active_time"));
                         JSONArray array = new JSONArray(res.getString("list"));
                         for(int i=0 ;i<array.length();i++){
@@ -215,6 +217,7 @@ public class TopListViewModel extends ViewModel {
                             movies.add(movie);
                         }
                         if(!movies.isEmpty()){
+                            firstMoviesTag=false;
                             movieList.setMovieList(movies);
                             Log.d("TopListViewModel", "onResponse: "+movieList.getMovieList().size());
                             movieListMutableLiveData.postValue(movieList);
@@ -222,7 +225,7 @@ public class TopListViewModel extends ViewModel {
 
                     }else {
                         if(firstMoviesTag){
-                            //                    第一次请求失败后获取数据库数据
+//                    第一次请求失败后获取数据库数据
                             firstMoviesTag=false;
                             new Thread(new Runnable() {
                                 @Override
@@ -304,6 +307,7 @@ public class TopListViewModel extends ViewModel {
                     List<Television> televisionList = new ArrayList<>();
                     JSONObject res = new JSONObject(new JSONObject(response.body().string()).getString("data"));
                     if(res.getInt("error_code")==0){
+//                        电视剧榜单数据获取成功
                         tvListEntity.setActive_time(res.getString("active_time"));
                         JSONArray array = new JSONArray(res.getString("list"));
                         for(int i=0 ;i<array.length();i++){
@@ -324,6 +328,7 @@ public class TopListViewModel extends ViewModel {
                             televisionList.add(television);
                         }
                         if(!televisionList.isEmpty()){
+                            firstTvsTag=false;
                             tvListEntity.setTelevisionList(televisionList);
                             tvListMutableLiveData.postValue(tvListEntity);
                         }
@@ -395,6 +400,7 @@ public class TopListViewModel extends ViewModel {
                     List<Show> showList = new ArrayList<>();
                     JSONObject res = new JSONObject(new JSONObject(response.body().string()).getString("data"));
                     if(res.getInt("error_code")==0){
+//                        show榜单获取成功
                         showListEntity.setActive_time(res.getString("active_time"));
                         JSONArray array = new JSONArray(res.getString("list"));
                         for(int i=0 ;i<array.length();i++){
@@ -415,6 +421,7 @@ public class TopListViewModel extends ViewModel {
                             showList.add(show);
                         }
                         if(!showList.isEmpty()){
+                            firstShowsTag=false;
                             showListEntity.setShowList(showList);
                             showListMutableLiveData.postValue(showListEntity);
                         }

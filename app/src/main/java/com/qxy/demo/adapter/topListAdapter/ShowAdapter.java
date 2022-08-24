@@ -20,6 +20,7 @@ import java.util.List;
 public class ShowAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
+//    show榜单需要显示的数据
     private List<Show> showList;
 
     public ShowAdapter(Context context){

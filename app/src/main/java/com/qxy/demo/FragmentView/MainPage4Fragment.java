@@ -88,8 +88,11 @@ public class MainPage4Fragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main_page4, container, false);
         pagerAdapter = new TopListFragmentPagerAdapter(this);
 //        binding.fragment4Viewpager
+
+//        设置榜单viewpager控件的adapter
         binding.fragment4Viewpager.setAdapter(pagerAdapter);
-        binding.fragment4Viewpager.setCurrentItem(1);
+//        设置初始化显示页面为电视剧榜单
+        binding.fragment4Viewpager.setCurrentItem(TopListFragmentPagerAdapter.TV_PAGE);
 
         return binding.getRoot();
     }

@@ -172,6 +172,7 @@ public class UserInfoViewModel extends ViewModel {
                     JSONObject res = new JSONObject(new JSONObject(response).getString("data"));
                     if(res.getInt("error_code")==0){
 //                        成功获取到用户信息
+                        firstTag=false;
                         douYinUser.setAvatar(res.getString("avatar"));
                         douYinUser.setCity(res.getString("city"));
                         douYinUser.setCountry(res.getString("country"));

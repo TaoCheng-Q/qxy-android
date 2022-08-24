@@ -20,6 +20,7 @@ import com.qxy.demo.R;
 import com.qxy.demo.activity.ArtDetailActivity;
 import com.qxy.demo.activity.FanActivity;
 import com.qxy.demo.adapter.ArtAdapter;
+import com.qxy.demo.adapter.FanPageAdapter;
 import com.qxy.demo.databinding.FragmentMainPage4Binding;
 import com.qxy.demo.databinding.FragmentMainPage5Binding;
 import com.qxy.demo.entity.VideoList;
@@ -124,7 +125,7 @@ public class MainPage5Fragment extends Fragment {
             public void onClick(View view) {
 //                跳转至粉丝列表显示页面
 //                bundle.putInt("position",1);
-                startActivity(intent.putExtra("position",1));
+                startActivity(intent.putExtra("position",FanPageAdapter.FANS_PAGE));
             }
         });
         binding.followingNum.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +133,7 @@ public class MainPage5Fragment extends Fragment {
             public void onClick(View view) {
 //                跳转到关注列表显示页面
 //                bundle.putInt("position",0);
-                startActivity(intent.putExtra("position",0));
+                startActivity(intent.putExtra("position", FanPageAdapter.FOLLOWS_PAGE));
             }
         });
 

@@ -116,6 +116,7 @@ public class FanViewModel extends ViewModel {
             List<Fans> fansList =new ArrayList<>();
             JSONObject res = new JSONObject(new JSONObject(response).getString("data"));
             if(res.getInt("error_code")==0){
+//                数据列表获取成功
                 fansListEntity.setCursor(res.getInt("cursor"));
                 fansListEntity.setHas_more(res.getBoolean("has_more"));
                 JSONArray array = new JSONArray(res.getString("list"));
@@ -132,9 +133,10 @@ public class FanViewModel extends ViewModel {
                 }
                 if(!fansList.isEmpty()){
                     fansListEntity.setFansList(fansList);
-                    mutableLiveData.setValue(fansListEntity);
+                    mutableLiveData.postValue(fansListEntity);
                 }
             }else {
+//                数据获取失败，
 
             }
         } catch (JSONException e) {

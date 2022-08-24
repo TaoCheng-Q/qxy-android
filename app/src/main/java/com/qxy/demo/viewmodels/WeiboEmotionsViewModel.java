@@ -71,6 +71,7 @@ public class WeiboEmotionsViewModel extends ViewModel {
                         emotionsList.add(emotions);
                     }
                     if(!emotionsList.isEmpty()){
+                        firstTag=false;
                         WeiboEmotions emotions = new WeiboEmotions();
                         emotions.setWeiboEmotionsList(emotionsList);
                         emotionsLiveData.postValue(emotions);
@@ -82,7 +83,7 @@ public class WeiboEmotionsViewModel extends ViewModel {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    getEmotionsByRoom(fromIndex);
+//                    getEmotionsByRoom(fromIndex);
                 }
             }
         });

@@ -82,6 +82,7 @@ public class WeiBoMessagesViewModel extends ViewModel {
                         weiBoMessageList.add(weiBoMessage);
                     }
                     if(!weiBoMessageList.isEmpty()){
+                        firstTag =false;
                         WeiBoMessageList messageList = new WeiBoMessageList(weiBoMessageList);
 //                        emotions.setWeiboEmotionsList(emotionsList);
                         weiBoMessageMutableLiveData.postValue(messageList);

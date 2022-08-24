@@ -20,6 +20,7 @@ import java.util.List;
 public class TvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
+//    电视剧榜单显示数据
     private List<Television> televisionList;
 
     public TvAdapter(Context context){

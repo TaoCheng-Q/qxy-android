@@ -1,5 +1,6 @@
 package com.qxy.demo.adapter.topListAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ public class VersionAdapter extends BaseAdapter {
     private int VERSION_TYPE=0;
     private int MORE_TYPE=1;
     private Context context;
+//    榜单版本列表需要显示的数据
     private List<Integer> integerList=new ArrayList<>(1);
 
     public VersionAdapter(Context context){
@@ -48,6 +50,7 @@ public class VersionAdapter extends BaseAdapter {
         return i;
     }
 
+    @SuppressLint("ViewHolder")
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         view = LayoutInflater.from(context).inflate(R.layout.top_list_version_item,viewGroup,false);

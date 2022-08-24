@@ -29,10 +29,13 @@ import java.util.List;
 public class FanFragment extends Fragment {
 
     private FanViewModel mViewModel;
+//    记录页面是关注列表还是粉丝列表
     private int position;
     private FragmentFanBinding binding;
     private FanItemAdapter adapter;
+//    记录页面游标
     private int cursor=0;
+//    需要显示的关注或者粉丝列表
     private List<Fans> adapterFansList =new ArrayList<>();
 
     private FanFragment(int position){
@@ -49,6 +52,7 @@ public class FanFragment extends Fragment {
 //        return inflater.inflate(R.layout.fragment_fan, container, false);
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_fan,container,false);
         mViewModel = new ViewModelProvider(this).get(FanViewModel.class);
+//        关注或者粉丝列表
         adapter = new FanItemAdapter(getContext());
         binding.followFanFragmnet.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.followFanFragmnet.setAdapter(adapter);
@@ -56,16 +60,23 @@ public class FanFragment extends Fragment {
         return binding.getRoot();
     }
 
+//    加载关注或者粉丝数据
     private void loadFans() {
         if(position==0){
+//            关注列表
             mViewModel.getFollowsListMutableLiveData(cursor).observe(getViewLifecycleOwner(), new Observer<FansList>() {
                 @Override
                 public void onChanged(FansList fansList) {
-                    adapter.setFansList(fansList.getFansList());
+                    if(adapterFansList.containsAll(fansList.getFansList())){
+                        return;
+                    }
+                    adapterFansList = fansList.getFansList();
+                    adapter.setFansList(adapterFansList);
                     cursor=fansList.getCursor();
                 }
             });
         }else {
+//            粉丝列表
             mViewModel.getFansListMutableLiveData(cursor).observe(getViewLifecycleOwner(), new Observer<FansList>() {
                 @Override
                 public void onChanged(FansList fansList) {

@@ -21,6 +21,7 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
+//    电影adapter需要显示的数据列表
     private List<Movie> movieList;
 
     public MovieAdapter(Context context){
@@ -54,7 +55,7 @@ public class MovieAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return movieList==null?0:movieList.size();
     }
 
-    public class MovieHolder extends RecyclerView.ViewHolder{
+    public static class MovieHolder extends RecyclerView.ViewHolder{
         public ImageView movie_cover;
         public TextView
                 movie_actor,

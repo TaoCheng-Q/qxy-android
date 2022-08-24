@@ -54,14 +54,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         BottomNavigationView bottom_nav = findViewById(R.id.bottom_nav);
 
+//        底部菜单设置选择监听事件
         bottom_nav.setOnItemSelectedListener(this);
 
+//        初始化第一个fragment
         replaceFragment(MainPage1Fragment.newInstance("p1","p2"));
 
+//        初始化数据库
         RoomUtil.getInstance().setRoomDatabase(getApplicationContext());
 
     }
 
+//    替换fragment方法
     public void replaceFragment(Fragment fragment){
         fragmentManager
                 .beginTransaction()
@@ -125,30 +129,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         item.setChecked(true);
         switch (item.getItemId()){
             case R.id.page1:
+//                显示第一个fragment
                 if(PreIndex!= 0){
                     replaceFragment(MainPage1Fragment.newInstance("p1","p2"));
                     PreIndex=0;
                 }
                 break;
             case R.id.page2:
+//                显示第二个fragment
                 if(PreIndex != 1){
                     replaceFragment(MainPage2Fragment.newInstance("p1","p2"));
                     PreIndex=1;
                 }
                 break;
             case R.id.page3:
+//                显示第三个fragment
                 if(PreIndex != 2){
                     replaceFragment(MainPage3Fragment.newInstance("p1","p2"));
                     PreIndex=2;
                 }
                 break;
             case R.id.page4:
+//                显示第四个fragment
                 if(PreIndex != 3){
                     replaceFragment(MainPage4Fragment.newInstance("p1","p2"));
                     PreIndex=3;
                 }
                 break;
             case R.id.page5:
+//                显示第五个fragment
                 if(PreIndex != 4){
                     replaceFragment(MainPage5Fragment.newInstance("p1","p2"));
                     PreIndex=4;
